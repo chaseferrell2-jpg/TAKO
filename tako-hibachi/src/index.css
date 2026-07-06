@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+/* ─── TAKO design tokens (Tailwind v4 theme) ─────────────────────── */
+@theme {
+  --color-ink: #0d0d0d; /* deep charcoal background          */
+  --color-panel: #161616; /* raised card surface               */
+  --color-edge: #262626; /* hairline borders                  */
+  --color-crimson: #e11d2e; /* logo red                          */
+  --color-crimson-dark: #b3121f; /* hover / pressed red               */
+  --color-flame: #f5a524; /* amber-gold teppanyaki accent      */
+  --color-jade: #22c55e; /* "we're open" green                */
+
+  --font-display: "Anton", "Arial Black", sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0d0d0d;
+  color: #fafafa;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Pulsing live-status dot (green = open, red = closed) */
+.live-dot {
+  position: relative;
+  display: inline-flex;
+  width: 10px;
+  height: 10px;
+}
+.live-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: currentColor;
+  animation: live-pulse 1.6s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes live-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .live-dot::after {
+    animation: none;
+  }
+}
